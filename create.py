@@ -33,15 +33,30 @@ def createLaravelProject(project_dir,project_name):
     # print("Laravel dependencies installed")
     return True
   
+
+def createVueProject(project_dir, project_name, template):
+    # create a vue project with vite
+    print("Creating Vue 3 Project ...")
+    os.system("npm create vite@latest {} --template {}".format(project_name, template))
+    print("Vue Project Created :-)")
+    path = os.path.join(project_dir, project_name)
+    os.chdir(path)
+    os.system("npm install -S")
+    print("Node Packages have been installed. Good Luck")
+    return True
+
+
 def main():
     try:
 
         parser = argparse.ArgumentParser()
         parser.add_argument("project_name", type=str,help="add the project name of a given number")
+        parser.add_argument("template", type=str,help="add template for vite of a given length")
         parser.add_argument("-repo", "--repo", help="Create Github repository",action="store_true")
         parser.add_argument("-push", "--push_repo", help="Push to GitHub",action="store_true")
         parser.add_argument("-lara", "--laravel", help="Create Laravel Project",action="store_true")
         parser.add_argument("-vs", "--vs_code", help="Open VsCode",action="store_true")
+        parser.add_argument("-vite", "--vite", help="Create Vite Frontend Project",action="store_true")
         args = parser.parse_args()
 
         if args.project_name:
@@ -49,6 +64,12 @@ def main():
             project_dir = input("Enter the path: ")
             os.chdir(project_dir)
 
+        if args.template:
+            print("Template type: {}".format(args.template))
+
+        if args.vite:
+            print("Project Directory: {}".format(project_dir))
+            project = createVueProject(project_dir, args.project_name, args.template)
     
         if args.laravel:
             print("Project Directory: {}".format(project_dir))
