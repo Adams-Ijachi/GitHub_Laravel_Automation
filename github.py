@@ -35,12 +35,8 @@ class GitHub:
     
 
     def push_to_github(self):
-        os.system("git push -u origin master")
+        os.system("git push -u origin main")
         return True
-
-
-
-
 
         # git remote add origin https://github.com/Adams-Ijachi/next_api.git
         # git remote add origin https://github.com/Adams-Ijachi/next_api.git
